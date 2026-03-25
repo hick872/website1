@@ -102,7 +102,7 @@
 
 		.music-bar {
 			position: fixed;
-			bottom: 10px;
+			top: 10px;
 			left: 50%;
 			transform: translateX(-50%);
 			width: 450px;
@@ -175,6 +175,191 @@
 
 		.music-control-btn:active {
 			border-color: #000000 #dfdfdf #dfdfdf #000000;
+		}
+
+		.music-control-btn.repeat-active {
+			background: linear-gradient(to bottom, #f0f0f0, #a0a0a0);
+			border-color: #808080 #dfdfdf #dfdfdf #808080;
+		}
+
+		/* Windows XP Taskbar Styles */
+		.taskbar {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 30px;
+			background: linear-gradient(to bottom, #3a6ea5, #1e3a5f);
+			border-top: 1px solid #0a246a;
+			display: flex;
+			align-items: center;
+			padding: 0 2px;
+			z-index: 1000;
+		}
+
+		.start-button {
+			height: 26px;
+			background: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+			border: 1px solid;
+			border-color: #dfdfdf #808080 #808080 #dfdfdf;
+			display: flex;
+			align-items: center;
+			padding: 0 8px;
+			cursor: pointer;
+			font-family: Arial, sans-serif;
+			font-size: 11px;
+			font-weight: bold;
+			color: #000;
+			margin-right: 2px;
+			box-shadow: 1px 1px 0 0 #dfdfdf inset, -1px -1px 0 0 #808080 inset;
+		}
+
+		.start-button:active {
+			border-color: #808080 #dfdfdf #dfdfdf #808080;
+			box-shadow: -1px -1px 0 0 #dfdfdf inset, 1px 1px 0 0 #808080 inset;
+		}
+
+		.start-icon {
+			width: 16px;
+			height: 16px;
+			margin-right: 4px;
+		}
+
+		.taskbar-apps {
+			flex-grow: 1;
+			display: flex;
+			align-items: center;
+			gap: 2px;
+		}
+
+		.taskbar-button {
+			height: 24px;
+			background-color: #1c4d24;
+			border: 1px solid;
+			border-color: #dfdfdf #808080 #808080 #dfdfdf;
+			display: flex;
+			align-items: center;
+			padding: 0 6px;
+			cursor: pointer;
+			font-family: Arial, sans-serif;
+			font-size: 10px;
+			color: #000;
+			min-width: 120px;
+			box-shadow: 1px 1px 0 0 #dfdfdf inset, -1px -1px 0 0 #808080 inset;
+		}
+
+		.taskbar-button.active {
+			background: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+			border-color: #808080 #dfdfdf #dfdfdf #808080;
+			box-shadow: -1px -1px 0 0 #dfdfdf inset, 1px 1px 0 0 #808080 inset;
+		}
+
+		.taskbar-button:hover {
+			background: linear-gradient(to bottom, #e8e4d8, #c8c4b8);
+		}
+
+		.taskbar-button-icon {
+			width: 14px;
+			height: 14px;
+			margin-right: 4px;
+		}
+
+		.taskbar-tray {
+			display: flex;
+			align-items: center;
+			gap: 2px;
+			margin-left: auto;
+		}
+
+		.tray-item {
+			width: 20px;
+			height: 20px;
+			background: linear-gradient(to bottom, #d4d0c8, #b8b4a8);
+			border: 1px solid;
+			border-color: #dfdfdf #808080 #808080 #dfdfdf;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			font-size: 10px;
+			box-shadow: 1px 1px 0 0 #dfdfdf inset, -1px -1px 0 0 #808080 inset;
+		}
+
+		.tray-item:active {
+			border-color: #808080 #dfdfdf #dfdfdf #808080;
+			box-shadow: -1px -1px 0 0 #dfdfdf inset, 1px 1px 0 0 #808080 inset;
+		}
+
+		.clock {
+			background-color: #1990be;
+			color: #d6d6d6;
+			font-family: 'Courier New', monospace;
+			font-size: 16px;
+			font-weight: bold;
+			padding: 0 4px;
+			min-width: 60px;
+			text-align: center;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+		}
+
+		/* Start Menu Styles */
+		.start-menu {
+			position: absolute;
+			bottom: 32px;
+			left: 0;
+			width: 200px;
+			background: linear-gradient(to bottom, #d4d0c8, #b8b4a8);
+			border: 2px solid;
+			border-color: #dfdfdf #808080 #808080 #dfdfdf;
+			box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+			display: none;
+			z-index: 2000;
+			font-family: Arial, sans-serif;
+			font-size: 11px;
+		}
+
+		.start-menu.show {
+			display: block;
+		}
+
+		.start-menu-header {
+			background: linear-gradient(to bottom, #7b9a8a, #5a7a6a);
+			color: white;
+			padding: 8px;
+			font-weight: bold;
+			border-bottom: 1px solid #808080;
+		}
+
+		.start-menu-item {
+			padding: 6px 12px;
+			cursor: pointer;
+			border-bottom: 1px solid #808080;
+			display: flex;
+			align-items: center;
+		}
+
+		.start-menu-item:hover {
+			background: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+		}
+
+		.start-menu-item:last-child {
+			border-bottom: none;
+		}
+
+		.start-menu-item-icon {
+			width: 16px;
+			height: 16px;
+			margin-right: 8px;
+		}
+
+		.start-menu-separator {
+			height: 1px;
+			background: #808080;
+			margin: 2px 0;
 		}
 	</style>
 </head>
@@ -257,11 +442,49 @@
 			<div class="music-control-btn" id="prev-btn">⏮</div>
 			<div class="music-control-btn" id="play-btn">▶</div>
 			<div class="music-control-btn" id="next-btn">⏭</div>
+			<div class="music-control-btn" id="repeat-btn">🔁</div>
 			<div class="volume-controls">
 				<div class="music-control-btn" id="vol-down-btn">🔉</div>
 				<div class="volume-indicator" id="volume-indicator">20%</div>
 				<div class="music-control-btn" id="vol-up-btn">🔊</div>
 			</div>
+		</div>
+	</div>
+
+<!-- Windows XP Taskbar -->
+	<div class="taskbar">
+		<div class="start-button" id="start-button">
+			<img class="start-icon" src="start.png" alt="Start" onerror="this.style.display='none'">
+			<span>start</span>
+		</div>
+		<div class="taskbar-apps" id="taskbar-apps">
+			<!-- Taskbar buttons will be dynamically added here -->
+		</div>
+		<div class="taskbar-tray">
+
+			<div class="clock" id="clock">12:00 PM</div>
+		</div>
+	</div>
+
+<!-- Start Menu -->
+	<div class="start-menu" id="start-menu">
+		<div class="start-menu-header">Hicko OS</div>
+		<div class="start-menu-item">
+			<img class="start-menu-item-icon" src="folder-open.png" alt="" onerror="this.style.display='none'">
+			<span>Programs</span>
+		</div>
+		<div class="start-menu-item">
+			<img class="start-menu-item-icon" src="text.png" alt="" onerror="this.style.display='none'">
+			<span>Documents</span>
+		</div>
+		<div class="start-menu-item">
+			<img class="start-menu-item-icon" src="settings.png" alt="" onerror="this.style.display='none'">
+			<span>Settings</span>
+		</div>
+		<div class="start-menu-separator"></div>
+		<div class="start-menu-item">
+			<img class="start-menu-item-icon" src="power.png" alt="" onerror="this.style.display='none'">
+			<span>Shut Down...</span>
 		</div>
 	</div>
 
@@ -285,65 +508,6 @@
 		// Initialize window states
 		Object.values(iconWindows).forEach(windowId => {
 			windowState[windowId] = false;
-		});
-
-		// Handle icon clicks
-		Object.keys(iconWindows).forEach(iconId => {
-			const icon = document.getElementById(iconId);
-			const windowId = iconWindows[iconId];
-			const img = icon.querySelector('.icon-image');
-
-			icon.addEventListener('click', () => {
-				const windowEl = document.getElementById(windowId);
-				windowState[windowId] = !windowState[windowId];
-				if (windowState[windowId]) {
-					// Open window
-					windowEl.classList.add('open');
-					img.src = 'unlocked.png';
-				} else {
-					// Close window
-					windowEl.classList.remove('open');
-					img.src = 'locked.png';
-					}
-
-				// Special handling for Recycle Bin
-				if (windowId === 'window-0' && windowState[windowId]) {
-					windowEl.classList.add('open');
-					img.src = 'recycle.png';
-				}
-				if (windowId === 'window-0' && !windowState[windowId]) {
-					windowEl.classList.remove('open');
-					img.src = 'recycle.png';} 
-
-				//Special handling for Portfolio
-				if (windowId === 'window-3' && windowState[windowId]) {
-					windowEl.classList.add('open');
-					img.src = 'text.png';
-				} 
-				if (windowId === 'window-3' && !windowState[windowId]) {
-					windowEl.classList.remove('open');
-					img.src = 'text.png';
-			}})});
-		// Handle window close buttons
-		document.querySelectorAll('.window-close').forEach(closeBtn => {
-			closeBtn.addEventListener('click', (e) => {
-				e.stopPropagation();
-				const windowId = closeBtn.getAttribute('data-close');
-				const windowEl = document.getElementById(windowId);
-				windowEl.classList.remove('open');
-				windowState[windowId] = false;
-
-				// Update icon image
-				const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
-				const img = document.getElementById(iconId).querySelector('.icon-image');
-				img.src = 'locked.png';
-				if (windowId === 'window-0') {
-					img.src = 'recycle.png';
-				}
-				if (windowId === 'window-3') {
-					img.src = 'text.png';
-				}
-			});
 		});
 
 		// Make windows draggable
@@ -471,10 +635,206 @@
 			}
 		});
 
+		// Handle repeat button
+		let isRepeatEnabled = false;
+		const repeatBtn = document.getElementById('repeat-btn');
+		repeatBtn.addEventListener('click', () => {
+			isRepeatEnabled = !isRepeatEnabled;
+			if (isRepeatEnabled) {
+				repeatBtn.classList.add('repeat-active');
+				musicInfo.textContent = 'Repeat: ON - The Great KIM';
+			} else {
+				repeatBtn.classList.remove('repeat-active');
+				if (!audioPlayer.paused) {
+					musicInfo.textContent = 'Playing: The Great KIM';
+				} else {
+					musicInfo.textContent = 'The Great KIM';
+				}
+			}
+		});
+
 		// Handle song end
 		audioPlayer.addEventListener('ended', () => {
-			playBtn.textContent = '▶';
-			musicInfo.textContent = 'Finished: The Great KIM';
+			if (isRepeatEnabled) {
+				audioPlayer.currentTime = 0;
+				audioPlayer.play();
+				playBtn.textContent = '⏸';
+				musicInfo.textContent = 'Repeat: ON - The Great KIM';
+			} else {
+				playBtn.textContent = '▶';
+				musicInfo.textContent = 'Finished: The Great KIM';
+			}
+		});
+
+		// Taskbar functionality
+		const taskbarApps = document.getElementById('taskbar-apps');
+		const startButton = document.getElementById('start-button');
+		const startMenu = document.getElementById('start-menu');
+		const clock = document.getElementById('clock');
+
+		// Window titles for taskbar buttons
+		const windowTitles = {
+			'window-0': 'Recycle Bin',
+			'window-1': 'Profile.prof',
+			'window-2': 'Social Media.txt',
+			'window-3': 'Portfolio.doc'
+		};
+
+		// Window icons for taskbar buttons
+		const windowIcons = {
+			'window-0': 'recycle.png',
+			'window-1': 'locked.png',
+			'window-2': 'locked.png',
+			'window-3': 'text.png'
+		};
+
+		// Function to update clock
+		function updateClock() {
+			const now = new Date();
+			let hours = now.getHours();
+			const minutes = now.getMinutes().toString().padStart(2, '0');
+			const ampm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			hours = hours ? hours : 12; // Convert 0 to 12
+			clock.textContent = `${hours}:${minutes} ${ampm}`;
+		}
+
+		// Update clock every second
+		setInterval(updateClock, 1000);
+		updateClock(); // Initial update
+
+		// Function to create taskbar button
+		function createTaskbarButton(windowId) {
+			const button = document.createElement('div');
+			button.className = 'taskbar-button';
+			button.id = `taskbar-${windowId}`;
+			button.innerHTML = `
+				<img class="taskbar-button-icon" src="${windowIcons[windowId]}" alt="" onerror="this.style.display='none'">
+				<span>${windowTitles[windowId]}</span>
+			`;
+
+			button.addEventListener('click', () => {
+				const windowEl = document.getElementById(windowId);
+				const isOpen = windowEl.classList.contains('open');
+
+				if (isOpen) {
+					// Minimize window
+					windowEl.classList.remove('open');
+					windowState[windowId] = false;
+					button.classList.remove('active');
+
+					// Update icon
+					const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
+					const img = document.getElementById(iconId).querySelector('.icon-image');
+					img.src = 'locked.png';
+					if (windowId === 'window-0') img.src = 'recycle.png';
+					if (windowId === 'window-3') img.src = 'text.png';
+				} else {
+					// Restore window
+					windowEl.classList.add('open');
+					windowState[windowId] = true;
+					button.classList.add('active');
+
+					// Update icon
+					const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
+					const img = document.getElementById(iconId).querySelector('.icon-image');
+					img.src = 'unlocked.png';
+					if (windowId === 'window-0') img.src = 'recycle.png';
+					if (windowId === 'window-3') img.src = 'text.png';
+				}
+			});
+
+			return button;
+		}
+
+		// Function to update taskbar buttons
+		function updateTaskbarButtons() {
+			// Clear existing buttons
+			taskbarApps.innerHTML = '';
+
+			// Add buttons for open windows
+			Object.keys(windowState).forEach(windowId => {
+				if (windowState[windowId]) {
+					const button = createTaskbarButton(windowId);
+					button.classList.add('active');
+					taskbarApps.appendChild(button);
+				}
+			});
+		}
+
+		// Override window opening/closing to update taskbar
+		const originalIconClickHandler = (iconId) => {
+			const icon = document.getElementById(iconId);
+			const windowId = iconWindows[iconId];
+			const img = icon.querySelector('.icon-image');
+
+			const wasOpen = windowState[windowId];
+			windowState[windowId] = !windowState[windowId];
+
+			const windowEl = document.getElementById(windowId);
+			if (windowState[windowId]) {
+				windowEl.classList.add('open');
+				img.src = 'unlocked.png';
+			} else {
+				windowEl.classList.remove('open');
+				img.src = 'locked.png';
+			}
+
+			// Special handling for Recycle Bin
+			if (windowId === 'window-0') {
+				img.src = 'recycle.png';
+			}
+			// Special handling for Portfolio
+			if (windowId === 'window-3') {
+				img.src = 'text.png';
+			}
+
+			updateTaskbarButtons();
+		};
+
+		// Update icon click handlers
+		Object.keys(iconWindows).forEach(iconId => {
+			const icon = document.getElementById(iconId);
+			icon.addEventListener('click', () => originalIconClickHandler(iconId));
+		});
+
+		// Update window close handlers
+		document.querySelectorAll('.window-close').forEach(closeBtn => {
+			closeBtn.addEventListener('click', (e) => {
+				e.stopPropagation();
+				const windowId = closeBtn.getAttribute('data-close');
+				const windowEl = document.getElementById(windowId);
+				windowEl.classList.remove('open');
+				windowState[windowId] = false;
+
+				// Update icon image
+				const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
+				const img = document.getElementById(iconId).querySelector('.icon-image');
+				img.src = 'locked.png';
+				if (windowId === 'window-0') img.src = 'recycle.png';
+				if (windowId === 'window-3') img.src = 'text.png';
+
+				updateTaskbarButtons();
+			});
+		});
+
+		// Start button functionality
+		startButton.addEventListener('click', (e) => {
+			e.stopPropagation();
+			startMenu.classList.toggle('show');
+		});
+
+		// Close start menu when clicking elsewhere
+		document.addEventListener('click', (e) => {
+			if (!startButton.contains(e.target) && !startMenu.contains(e.target)) {
+				startMenu.classList.remove('show');
+			}
+		});
+
+		// Volume tray click
+		document.getElementById('volume-tray').addEventListener('click', () => {
+			const currentVolume = Math.round(audioPlayer.volume * 100);
+			alert(`Volume: ${currentVolume}%\n\nUse the music bar controls to adjust volume.`);
 		});
 	</script>
 </body>
