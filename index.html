@@ -99,6 +99,83 @@
 			overflow: auto;
 			height: calc(100% - 24px);
 		}
+
+		.music-bar {
+			position: fixed;
+			bottom: 10px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 450px;
+			height: 40px;
+			background: #c0c0c0;
+			border: 2px solid;
+			border-color: #dfdfdf #808080 #808080 #dfdfdf;
+			box-shadow: 1px 1px 0 0 #dfdfdf inset, -1px -1px 0 0 #808080 inset;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 3px 8px;
+			font-family: Arial, sans-serif;
+			font-size: 11px;
+			cursor: move;
+			user-select: none;
+		}
+
+		.music-bar-title {
+			font-weight: bold;
+			color: #000;
+			flex-shrink: 0;
+		}
+
+		.music-info {
+			flex-grow: 1;
+			text-align: center;
+			color: #000;
+			margin: 0 10px;
+		}
+
+		.music-controls {
+			display: flex;
+			gap: 5px;
+			flex-shrink: 0;
+		}
+
+		.volume-controls {
+			display: flex;
+			align-items: center;
+			gap: 3px;
+			margin-left: 8px;
+			padding-left: 8px;
+			border-left: 1px solid #808080;
+		}
+
+		.volume-indicator {
+			font-size: 9px;
+			color: #000;
+			min-width: 30px;
+			text-align: center;
+			background: #c0c0c0;
+			border: 1px solid;
+			border-color: #dfdfdf #000000 #000000 #dfdfdf;
+			padding: 1px 2px;
+		}
+
+		.music-control-btn {
+			width: 18px;
+			height: 18px;
+			background: #c0c0c0;
+			border: 1px solid;
+			border-color: #dfdfdf #000000 #000000 #dfdfdf;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 9px;
+		}
+
+		.music-control-btn:active {
+			border-color: #000000 #dfdfdf #dfdfdf #000000;
+		}
 	</style>
 </head>
 <body style="background-image: url('Bliss.png'); background-attachment: fixed; background-size: cover; background-position: center; margin: 0; padding: 0; overflow: hidden;">
@@ -171,6 +248,28 @@
 			<p>!UNDER CONSTRUCTION!</p>
 		</div>
 	</div>
+
+<!-- Music Bar -->
+	<div class="music-bar" id="music-bar">
+		<div class="music-bar-title">Now Playing</div>
+		<div class="music-info">No song selected</div>
+		<div class="music-controls">
+			<div class="music-control-btn" id="prev-btn">⏮</div>
+			<div class="music-control-btn" id="play-btn">▶</div>
+			<div class="music-control-btn" id="next-btn">⏭</div>
+			<div class="volume-controls">
+				<div class="music-control-btn" id="vol-down-btn">🔉</div>
+				<div class="volume-indicator" id="volume-indicator">20%</div>
+				<div class="music-control-btn" id="vol-up-btn">🔊</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Hidden audio element -->
+	<audio id="audio-player" preload="metadata">
+		<source src="The Great KIM.mp3" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
 
 	<script>
 		// Icon and Window Management
@@ -271,6 +370,111 @@
 		document.addEventListener('mouseup', () => {
 			isDragging = false;
 		});
+		});
+
+		// Make music bar draggable
+		const musicBar = document.getElementById('music-bar');
+		let isDraggingMusic = false;
+		let dragOffsetX = 0;
+		let dragOffsetY = 0;
+
+		musicBar.addEventListener('mousedown', (e) => {
+			isDraggingMusic = true;
+			const rect = musicBar.getBoundingClientRect();
+			dragOffsetX = e.clientX - rect.left;
+			dragOffsetY = e.clientY - rect.top;
+			musicBar.style.position = 'absolute';
+			musicBar.style.left = rect.left + 'px';
+			musicBar.style.top = rect.top + 'px';
+			musicBar.style.transform = 'none';
+			musicBar.style.bottom = 'auto';
+		});
+
+		document.addEventListener('mousemove', (e) => {
+			if (isDraggingMusic) {
+				musicBar.style.left = (e.clientX - dragOffsetX) + 'px';
+				musicBar.style.top = (e.clientY - dragOffsetY) + 'px';
+			}
+		});
+
+		document.addEventListener('mouseup', () => {
+			isDraggingMusic = false;
+		});
+
+		// Initialize audio player
+		const audioPlayer = document.getElementById('audio-player');
+		const musicInfo = document.querySelector('.music-info');
+		const playBtn = document.getElementById('play-btn');
+		const volumeIndicator = document.getElementById('volume-indicator');
+
+		// Function to update volume indicator
+		function updateVolumeIndicator() {
+			const volumePercent = Math.round(audioPlayer.volume * 100);
+			volumeIndicator.textContent = volumePercent + '%';
+		}
+
+		// Set initial low volume and update indicator
+		audioPlayer.volume = 0.2;
+		updateVolumeIndicator();
+
+		// Update music info when metadata loads
+		audioPlayer.addEventListener('loadedmetadata', () => {
+			musicInfo.textContent = 'The Great KIM';
+		});
+
+		// Handle play/pause button
+		playBtn.addEventListener('click', () => {
+			if (audioPlayer.paused) {
+				audioPlayer.play();
+				playBtn.textContent = '⏸';
+				musicInfo.textContent = 'Playing: The Great KIM';
+			} else {
+				audioPlayer.pause();
+				playBtn.textContent = '▶';
+				musicInfo.textContent = 'Paused: The Great KIM';
+			}
+		});
+
+		// Handle previous button (restart song)
+		document.getElementById('prev-btn').addEventListener('click', () => {
+			audioPlayer.currentTime = 0;
+			if (!audioPlayer.paused) {
+				musicInfo.textContent = 'Restarted: The Great KIM';
+			} else {
+				musicInfo.textContent = 'The Great KIM';
+			}
+		});
+
+		// Handle next button (restart song for single track)
+		document.getElementById('next-btn').addEventListener('click', () => {
+			audioPlayer.currentTime = 0;
+			if (!audioPlayer.paused) {
+				musicInfo.textContent = 'Restarted: The Great KIM';
+			} else {
+				musicInfo.textContent = 'The Great KIM';
+			}
+		});
+
+		// Handle volume down button
+		document.getElementById('vol-down-btn').addEventListener('click', () => {
+			if (audioPlayer.volume > 0.1) {
+				audioPlayer.volume = Math.max(0, audioPlayer.volume - 0.1);
+				updateVolumeIndicator();
+			}
+		});
+
+		// Handle volume up button
+		document.getElementById('vol-up-btn').addEventListener('click', () => {
+			if (audioPlayer.volume < 1.0) {
+				audioPlayer.volume = Math.min(1, audioPlayer.volume + 0.1);
+				updateVolumeIndicator();
+			}
+		});
+
+		// Handle song end
+		audioPlayer.addEventListener('ended', () => {
+			playBtn.textContent = '▶';
+			musicInfo.textContent = 'Finished: The Great KIM';
 		});
 	</script>
 </body>
