@@ -365,8 +365,6 @@
 </head>
 <body style="background-image: url('Bliss.png'); background-attachment: fixed; background-size: cover; background-position: center; margin: 0; padding: 0; overflow: hidden;">
 
-<!-- Desktop Icons -->
-
 	<div class="icon-container" id="icon-0" style="top: 20px; left: 20px;">
 		<img class="icon-image" src="recycle.png" alt="Home Icon">
 		<div class="icon-label">Recycle Bin</div>
@@ -387,15 +385,13 @@
 		<div class="icon-label">Portfolio</div>
 	</div>
 
-<!-- Windows -->
-
 	<div class="window" id="window-0">
 		<div class="window-titlebar">
 			<div class="window-title">Recycle Bin</div>
 			<div class="window-close" data-close="window-0">✕</div>
 		</div>
 		<div class="window-content">
-			<p>UNDER CONSTRUCTION</p>
+			<p>!UNDER CONSTRUCTION!</p>
 		</div>
 	</div>
 
@@ -417,7 +413,7 @@
 		<div class="window-content">
 			<div style="position: relative; display: inline-block;">
 				<img src="Template1.png" alt="Social Media Image" style="width: auto; height: auto;" />
-				<a href="https://www.instagram.com/hickory877/" target="_blank" style="position: absolute; left: 80px; top: 19%; color: #0066cc; text-decoration: none; font-weight: bold; font-size: 16px;">Instagram</a>
+				<a href="https://www.instagram.com/hickory877/" target="_blank" style="position: absolute; left: 80px; top: 18.5%; color: #0066cc; text-decoration: none; font-weight: bold; font-size: 16px;">Instagram</a>
 				<a href="https://www.youtube.com/channel/UCkkbIO03JCa13n2zCHBICIA" target="_blank" style="position: absolute; left: 80px; top: 47%; color: #0066cc; text-decoration: none; font-weight: bold; font-size: 16px;">YouTube</a>
 				<a href="https://linktr.ee/hickory87" target="_blank" style="position: absolute; left: 80px; top: 73%; color: #0066cc; text-decoration: none; font-weight: bold; font-size: 16px;">LinkTree</a>
 			</div>
@@ -434,7 +430,6 @@
 		</div>
 	</div>
 
-<!-- Music Bar -->
 	<div class="music-bar" id="music-bar">
 		<div class="music-bar-title">Now Playing</div>
 		<div class="music-info">No song selected</div>
@@ -451,7 +446,6 @@
 		</div>
 	</div>
 
-<!-- Windows XP Taskbar -->
 	<div class="taskbar">
 		<div class="start-button" id="start-button">
 			<img class="start-icon" src="start.png" alt="Start" onerror="this.style.display='none'">
@@ -466,7 +460,6 @@
 		</div>
 	</div>
 
-<!-- Start Menu -->
 	<div class="start-menu" id="start-menu">
 		<div class="start-menu-header">Hicko OS</div>
 		<div class="start-menu-item">
@@ -488,354 +481,11 @@
 		</div>
 	</div>
 
-	<!-- Hidden audio element -->
 	<audio id="audio-player" preload="metadata">
 		<source src="The Great KIM.mp3" type="audio/mpeg">
 		Your browser does not support the audio element.
 	</audio>
 
-	<script>
-		// Icon and Window Management
-		const iconWindows = {
-			'icon-0': 'window-0',
-			'icon-1': 'window-1',
-			'icon-2': 'window-2',
-			'icon-3': 'window-3'
-		};
-
-		const windowState = {};
-
-		// Initialize window states
-		Object.values(iconWindows).forEach(windowId => {
-			windowState[windowId] = false;
-		});
-
-		// Make windows draggable
-		const windows = document.querySelectorAll('.window');
-		windows.forEach(windowEl => {
-			let isDragging = false;
-			let dragOffsetX = 0;
-			let dragOffsetY = 0;
-
-			const titlebar = windowEl.querySelector('.window-titlebar');
-			titlebar.addEventListener('mousedown', (e) => {
-				isDragging = true;
-				dragOffsetX = e.clientX - windowEl.offsetLeft;
-				dragOffsetY = e.clientY - windowEl.offsetTop;
-			});
-
-			document.addEventListener('mousemove', (e) => {
-				if (isDragging) {
-					windowEl.style.left = (e.clientX - dragOffsetX) + 'px';
-					windowEl.style.top = (e.clientY - dragOffsetY) + 'px';
-				}
-			});
-
-		document.addEventListener('mouseup', () => {
-			isDragging = false;
-		});
-		});
-
-		// Make music bar draggable
-		const musicBar = document.getElementById('music-bar');
-		let isDraggingMusic = false;
-		let dragOffsetX = 0;
-		let dragOffsetY = 0;
-
-		musicBar.addEventListener('mousedown', (e) => {
-			isDraggingMusic = true;
-			const rect = musicBar.getBoundingClientRect();
-			dragOffsetX = e.clientX - rect.left;
-			dragOffsetY = e.clientY - rect.top;
-			musicBar.style.position = 'absolute';
-			musicBar.style.left = rect.left + 'px';
-			musicBar.style.top = rect.top + 'px';
-			musicBar.style.transform = 'none';
-			musicBar.style.bottom = 'auto';
-		});
-
-		document.addEventListener('mousemove', (e) => {
-			if (isDraggingMusic) {
-				musicBar.style.left = (e.clientX - dragOffsetX) + 'px';
-				musicBar.style.top = (e.clientY - dragOffsetY) + 'px';
-			}
-		});
-
-		document.addEventListener('mouseup', () => {
-			isDraggingMusic = false;
-		});
-
-		// Initialize audio player
-		const audioPlayer = document.getElementById('audio-player');
-		const musicInfo = document.querySelector('.music-info');
-		const playBtn = document.getElementById('play-btn');
-		const volumeIndicator = document.getElementById('volume-indicator');
-
-		// Function to update volume indicator
-		function updateVolumeIndicator() {
-			const volumePercent = Math.round(audioPlayer.volume * 100);
-			volumeIndicator.textContent = volumePercent + '%';
-		}
-
-		// Set initial low volume and update indicator
-		audioPlayer.volume = 0.2;
-		updateVolumeIndicator();
-
-		// Update music info when metadata loads
-		audioPlayer.addEventListener('loadedmetadata', () => {
-			musicInfo.textContent = 'The Great KIM';
-		});
-
-		// Handle play/pause button
-		playBtn.addEventListener('click', () => {
-			if (audioPlayer.paused) {
-				audioPlayer.play();
-				playBtn.textContent = '⏸';
-				musicInfo.textContent = 'Playing: The Great KIM';
-			} else {
-				audioPlayer.pause();
-				playBtn.textContent = '▶';
-				musicInfo.textContent = 'Paused: The Great KIM';
-			}
-		});
-
-		// Handle previous button (restart song)
-		document.getElementById('prev-btn').addEventListener('click', () => {
-			audioPlayer.currentTime = 0;
-			if (!audioPlayer.paused) {
-				musicInfo.textContent = 'Restarted: The Great KIM';
-			} else {
-				musicInfo.textContent = 'The Great KIM';
-			}
-		});
-
-		// Handle next button (restart song for single track)
-		document.getElementById('next-btn').addEventListener('click', () => {
-			audioPlayer.currentTime = 0;
-			if (!audioPlayer.paused) {
-				musicInfo.textContent = 'Restarted: The Great KIM';
-			} else {
-				musicInfo.textContent = 'The Great KIM';
-			}
-		});
-
-		// Handle volume down button
-		document.getElementById('vol-down-btn').addEventListener('click', () => {
-			if (audioPlayer.volume > 0.1) {
-				audioPlayer.volume = Math.max(0, audioPlayer.volume - 0.1);
-				updateVolumeIndicator();
-			}
-		});
-
-		// Handle volume up button
-		document.getElementById('vol-up-btn').addEventListener('click', () => {
-			if (audioPlayer.volume < 1.0) {
-				audioPlayer.volume = Math.min(1, audioPlayer.volume + 0.1);
-				updateVolumeIndicator();
-			}
-		});
-
-		// Handle repeat button
-		let isRepeatEnabled = false;
-		const repeatBtn = document.getElementById('repeat-btn');
-		repeatBtn.addEventListener('click', () => {
-			isRepeatEnabled = !isRepeatEnabled;
-			if (isRepeatEnabled) {
-				repeatBtn.classList.add('repeat-active');
-				musicInfo.textContent = 'Repeat: ON - The Great KIM';
-			} else {
-				repeatBtn.classList.remove('repeat-active');
-				if (!audioPlayer.paused) {
-					musicInfo.textContent = 'Playing: The Great KIM';
-				} else {
-					musicInfo.textContent = 'The Great KIM';
-				}
-			}
-		});
-
-		// Handle song end
-		audioPlayer.addEventListener('ended', () => {
-			if (isRepeatEnabled) {
-				audioPlayer.currentTime = 0;
-				audioPlayer.play();
-				playBtn.textContent = '⏸';
-				musicInfo.textContent = 'Repeat: ON - The Great KIM';
-			} else {
-				playBtn.textContent = '▶';
-				musicInfo.textContent = 'Finished: The Great KIM';
-			}
-		});
-
-		// Taskbar functionality
-		const taskbarApps = document.getElementById('taskbar-apps');
-		const startButton = document.getElementById('start-button');
-		const startMenu = document.getElementById('start-menu');
-		const clock = document.getElementById('clock');
-
-		// Window titles for taskbar buttons
-		const windowTitles = {
-			'window-0': 'Recycle Bin',
-			'window-1': 'Profile.prof',
-			'window-2': 'Social Media.txt',
-			'window-3': 'Portfolio.doc'
-		};
-
-		// Window icons for taskbar buttons
-		const windowIcons = {
-			'window-0': 'recycle.png',
-			'window-1': 'locked.png',
-			'window-2': 'locked.png',
-			'window-3': 'text.png'
-		};
-
-		// Function to update clock
-		function updateClock() {
-			const now = new Date();
-			let hours = now.getHours();
-			const minutes = now.getMinutes().toString().padStart(2, '0');
-			const ampm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			hours = hours ? hours : 12; // Convert 0 to 12
-			clock.textContent = `${hours}:${minutes} ${ampm}`;
-		}
-
-		// Update clock every second
-		setInterval(updateClock, 1000);
-		updateClock(); // Initial update
-
-		// Function to create taskbar button
-		function createTaskbarButton(windowId) {
-			const button = document.createElement('div');
-			button.className = 'taskbar-button';
-			button.id = `taskbar-${windowId}`;
-			button.innerHTML = `
-				<img class="taskbar-button-icon" src="${windowIcons[windowId]}" alt="" onerror="this.style.display='none'">
-				<span>${windowTitles[windowId]}</span>
-			`;
-
-			button.addEventListener('click', () => {
-				const windowEl = document.getElementById(windowId);
-				const isOpen = windowEl.classList.contains('open');
-
-				if (isOpen) {
-					// Minimize window
-					windowEl.classList.remove('open');
-					windowState[windowId] = false;
-					button.classList.remove('active');
-
-					// Update icon
-					const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
-					const img = document.getElementById(iconId).querySelector('.icon-image');
-					img.src = 'locked.png';
-					if (windowId === 'window-0') img.src = 'recycle.png';
-					if (windowId === 'window-3') img.src = 'text.png';
-				} else {
-					// Restore window
-					windowEl.classList.add('open');
-					windowState[windowId] = true;
-					button.classList.add('active');
-
-					// Update icon
-					const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
-					const img = document.getElementById(iconId).querySelector('.icon-image');
-					img.src = 'unlocked.png';
-					if (windowId === 'window-0') img.src = 'recycle.png';
-					if (windowId === 'window-3') img.src = 'text.png';
-				}
-			});
-
-			return button;
-		}
-
-		// Function to update taskbar buttons
-		function updateTaskbarButtons() {
-			// Clear existing buttons
-			taskbarApps.innerHTML = '';
-
-			// Add buttons for open windows
-			Object.keys(windowState).forEach(windowId => {
-				if (windowState[windowId]) {
-					const button = createTaskbarButton(windowId);
-					button.classList.add('active');
-					taskbarApps.appendChild(button);
-				}
-			});
-		}
-
-		// Override window opening/closing to update taskbar
-		const originalIconClickHandler = (iconId) => {
-			const icon = document.getElementById(iconId);
-			const windowId = iconWindows[iconId];
-			const img = icon.querySelector('.icon-image');
-
-			const wasOpen = windowState[windowId];
-			windowState[windowId] = !windowState[windowId];
-
-			const windowEl = document.getElementById(windowId);
-			if (windowState[windowId]) {
-				windowEl.classList.add('open');
-				img.src = 'unlocked.png';
-			} else {
-				windowEl.classList.remove('open');
-				img.src = 'locked.png';
-			}
-
-			// Special handling for Recycle Bin
-			if (windowId === 'window-0') {
-				img.src = 'recycle.png';
-			}
-			// Special handling for Portfolio
-			if (windowId === 'window-3') {
-				img.src = 'text.png';
-			}
-
-			updateTaskbarButtons();
-		};
-
-		// Update icon click handlers
-		Object.keys(iconWindows).forEach(iconId => {
-			const icon = document.getElementById(iconId);
-			icon.addEventListener('click', () => originalIconClickHandler(iconId));
-		});
-
-		// Update window close handlers
-		document.querySelectorAll('.window-close').forEach(closeBtn => {
-			closeBtn.addEventListener('click', (e) => {
-				e.stopPropagation();
-				const windowId = closeBtn.getAttribute('data-close');
-				const windowEl = document.getElementById(windowId);
-				windowEl.classList.remove('open');
-				windowState[windowId] = false;
-
-				// Update icon image
-				const iconId = Object.keys(iconWindows).find(key => iconWindows[key] === windowId);
-				const img = document.getElementById(iconId).querySelector('.icon-image');
-				img.src = 'locked.png';
-				if (windowId === 'window-0') img.src = 'recycle.png';
-				if (windowId === 'window-3') img.src = 'text.png';
-
-				updateTaskbarButtons();
-			});
-		});
-
-		// Start button functionality
-		startButton.addEventListener('click', (e) => {
-			e.stopPropagation();
-			startMenu.classList.toggle('show');
-		});
-
-		// Close start menu when clicking elsewhere
-		document.addEventListener('click', (e) => {
-			if (!startButton.contains(e.target) && !startMenu.contains(e.target)) {
-				startMenu.classList.remove('show');
-			}
-		});
-
-		// Volume tray click
-		document.getElementById('volume-tray').addEventListener('click', () => {
-			const currentVolume = Math.round(audioPlayer.volume * 100);
-			alert(`Volume: ${currentVolume}%\n\nUse the music bar controls to adjust volume.`);
-		});
-	</script>
+	<script src="javascript.js" defer></script>
 </body>
 </html>
