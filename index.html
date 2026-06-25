@@ -51,6 +51,8 @@
 			min-width: 300px;
 			min-height: 200px;
 			box-shadow: 1px 1px 0 0 #dfdfdf inset, -1px -1px 0 0 #808080 inset;
+			resize: both;
+			overflow: auto;
 		}
 
 		.window.open {
@@ -98,6 +100,114 @@
 			padding: 10px;
 			overflow: auto;
 			height: calc(100% - 24px);
+		}
+
+		.window-content.recycle-bin-content {
+			padding: 0;
+		}
+
+		.recycle-explorer {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			background: #f3f3f3;
+			font-family: Arial, sans-serif;
+			color: #222;
+		}
+
+		.recycle-toolbar {
+			display: flex;
+			gap: 6px;
+			padding: 8px;
+			background: linear-gradient(to bottom, #f5f5f5, #e2e2e2);
+			border-bottom: 1px solid #c0c0c0;
+		}
+
+		.recycle-toolbar button {
+			background: #f5f5f5;
+			border: 1px solid #9ea7b3;
+			border-radius: 2px;
+			padding: 4px 8px;
+			font-size: 11px;
+			cursor: pointer;
+			color: #222;
+		}
+
+		.recycle-body {
+			display: flex;
+			flex: 1;
+			min-height: 0;
+		}
+
+		.recycle-sidebar {
+			width: 120px;
+			background: #f0f0f0;
+			border-right: 1px solid #d0d0d0;
+			padding: 8px 6px;
+		}
+
+		.recycle-sidebar-title {
+			font-size: 10px;
+			text-transform: uppercase;
+			color: #666;
+			letter-spacing: 0.5px;
+			margin-bottom: 6px;
+		}
+
+		.recycle-item {
+			padding: 4px 6px;
+			font-size: 12px;
+			border-radius: 2px;
+			margin-bottom: 2px;
+			cursor: pointer;
+		}
+
+		.recycle-item.active {
+			background: #dce8f6;
+			color: #1a4f8a;
+			font-weight: bold;
+		}
+
+		.recycle-main {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			background: #fff;
+		}
+
+		.recycle-header {
+			display: flex;
+			justify-content: space-between;
+			padding: 8px 10px;
+			border-bottom: 1px solid #e0e0e0;
+			font-size: 12px;
+			color: #444;
+			background: #fafafa;
+		}
+
+		.recycle-list {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			padding: 8px;
+			overflow: auto;
+		}
+
+		.recycle-file {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 4px 6px;
+			border-radius: 2px;
+			font-size: 12px;
+		}
+
+		.recycle-file:hover {
+			background: #eef5ff;
+		}
+
+		.recycle-icon {
+			font-size: 14px;
 		}
 
 		.music-bar {
@@ -363,7 +473,7 @@
 		}
 	</style>
 </head>
-<body style="background-image: url('Bliss.png'); background-attachment: fixed; background-size: cover; background-position: center; margin: 0; padding: 0; overflow: hidden;">
+<body style="background-image: url('Bliss.jpg'); background-attachment: fixed; background-size: cover; background-position: center; margin: 0; padding: 0; overflow: hidden;">
 
 	<div class="icon-container" id="icon-0" style="top: 20px; left: 20px;">
 		<img class="icon-image" src="recycle.png" alt="Home Icon">
@@ -390,8 +500,33 @@
 			<div class="window-title">Recycle Bin</div>
 			<div class="window-close" data-close="window-0">✕</div>
 		</div>
-		<div class="window-content">
-			<p>!UNDER CONSTRUCTION!</p>
+		<div class="window-content recycle-bin-content">
+			<div class="recycle-explorer">
+				<div class="recycle-toolbar">
+					<button>Open</button>
+					<button>Restore</button>
+					<button>Empty</button>
+				</div>
+				<div class="recycle-body">
+					<div class="recycle-sidebar">
+						<div class="recycle-sidebar-title">Places</div>
+						<div class="recycle-item active" data-window="window-0">Recycle Bin 🗑️</div>
+						<div class="recycle-item" data-window="window-4">Programs 🖥️</div>
+						<div class="recycle-item" data-window="window-5">Documents 📄</div>
+						<div class="recycle-item" data-window="window-6">Settings ⚙️</div>
+					</div>
+					<div class="recycle-main">
+						<div class="recycle-header">
+							<span>Recycle Bin</span>
+							<span>2 items</span>
+						</div>
+						<div class="recycle-list">
+							<div class="recycle-file"><span class="recycle-icon">🗑️</span><span>ideas.txt</span></div>
+							<div class="recycle-file"><span class="recycle-icon">🗑️</span><span>NOT my nudes.7z</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -430,6 +565,111 @@
 		</div>
 	</div>
 
+	<div class="window" id="window-4">
+		<div class="window-titlebar">
+			<div class="window-title">Programs</div>
+			<div class="window-close" data-close="window-4">✕</div>
+		</div>
+		<div class="window-content recycle-bin-content">
+			<div class="recycle-explorer">
+				<div class="recycle-toolbar">
+					<button>Open</button>
+					<button>Explore</button>
+				</div>
+				<div class="recycle-body">
+					<div class="recycle-sidebar">
+						<div class="recycle-sidebar-title">Places</div>
+						<div class="recycle-item" data-window="window-0">Recycle Bin 🗑️</div>
+						<div class="recycle-item active" data-window="window-4">Programs 🖥️</div>
+						<div class="recycle-item" data-window="window-5">Documents 📄</div>
+						<div class="recycle-item" data-window="window-6">Settings ⚙️</div>
+					</div>
+					<div class="recycle-main">
+						<div class="recycle-header">
+							<span>Programs</span>
+							<span>3 items</span>
+						</div>
+						<div class="recycle-list">
+							<div class="recycle-file"><span class="recycle-icon">📁</span><span>Portfolio</span></div>
+							<div class="recycle-file"><span class="recycle-icon">📁</span><span>Music Player</span></div>
+							<div class="recycle-file"><span class="recycle-icon">📁</span><span>Social Links</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="window" id="window-5">
+		<div class="window-titlebar">
+			<div class="window-title">Documents</div>
+			<div class="window-close" data-close="window-5">✕</div>
+		</div>
+		<div class="window-content recycle-bin-content">
+			<div class="recycle-explorer">
+				<div class="recycle-toolbar">
+					<button>Open</button>
+					<button>Find</button>
+				</div>
+				<div class="recycle-body">
+					<div class="recycle-sidebar">
+						<div class="recycle-sidebar-title">Places</div>
+						<div class="recycle-item" data-window="window-0">Recycle Bin 🗑️</div>
+						<div class="recycle-item" data-window="window-4">Programs 🖥️</div>
+						<div class="recycle-item active" data-window="window-5">Documents 📄</div>
+						<div class="recycle-item" data-window="window-6">Settings ⚙️</div>
+					</div>
+					<div class="recycle-main">
+						<div class="recycle-header">
+							<span>Documents</span>
+							<span>3 items</span>
+						</div>
+						<div class="recycle-list">
+							<div class="recycle-file"><span class="recycle-icon">📄</span><span>Profile.prof</span></div>
+							<div class="recycle-file"><span class="recycle-icon">📄</span><span>Resume.docx</span></div>
+							<div class="recycle-file"><span class="recycle-icon">📄</span><span>Notes.txt</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="window" id="window-6">
+		<div class="window-titlebar">
+			<div class="window-title">Settings</div>
+			<div class="window-close" data-close="window-6">✕</div>
+		</div>
+		<div class="window-content recycle-bin-content">
+			<div class="recycle-explorer">
+				<div class="recycle-toolbar">
+					<button>Open</button>
+					<button>Customize</button>
+				</div>
+				<div class="recycle-body">
+					<div class="recycle-sidebar">
+						<div class="recycle-sidebar-title">Places</div>
+						<div class="recycle-item" data-window="window-0">Recycle Bin 🗑️</div>
+						<div class="recycle-item" data-window="window-4">Programs 🖥️</div>
+						<div class="recycle-item" data-window="window-5">Documents 📄</div>
+						<div class="recycle-item" data-window="window-6">Settings ⚙️</div>
+					</div>
+					<div class="recycle-main">
+						<div class="recycle-header">
+							<span>Settings</span>
+							<span>3 items</span>
+						</div>
+						<div class="recycle-list">
+							<div class="recycle-file"><span class="recycle-icon">⚙️</span><span>Appearance</span></div>
+							<div class="recycle-file"><span class="recycle-icon">⚙️</span><span>Sound</span></div>
+							<div class="recycle-file"><span class="recycle-icon">⚙️</span><span>Desktop</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="music-bar" id="music-bar">
 		<div class="music-bar-title">Now Playing</div>
 		<div class="music-info">No song selected</div>
@@ -462,22 +702,22 @@
 
 	<div class="start-menu" id="start-menu">
 		<div class="start-menu-header">Hicko OS</div>
-		<div class="start-menu-item">
+		<div class="start-menu-item" data-window="window-4">
 			<img class="start-menu-item-icon" src="folder-open.png" alt="" onerror="this.style.display='none'">
 			<span>Programs</span>
 		</div>
-		<div class="start-menu-item">
+		<div class="start-menu-item" data-window="window-5">
 			<img class="start-menu-item-icon" src="text.png" alt="" onerror="this.style.display='none'">
 			<span>Documents</span>
 		</div>
-		<div class="start-menu-item">
+		<div class="start-menu-item" data-window="window-6">
 			<img class="start-menu-item-icon" src="settings.png" alt="" onerror="this.style.display='none'">
 			<span>Settings</span>
 		</div>
 		<div class="start-menu-separator"></div>
-		<div class="start-menu-item">
-			<img class="start-menu-item-icon" src="power.png" alt="" onerror="this.style.display='none'">
-			<span>Shut Down...</span>
+		<div class="start-menu-item" data-window="shutdown">
+			<img class="start-menu-item-icon" src="power.png" onerror="this.style.display='none'">
+			<span>Shut Down</span>
 		</div>
 	</div>
 

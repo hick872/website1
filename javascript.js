@@ -5,6 +5,12 @@ const iconWindows = {
   'icon-3': 'window-3'
 };
 
+const startMenuWindows = {
+  'window-4': 'Programs',
+  'window-5': 'Documents',
+  'window-6': 'Settings'
+};
+
 const windowState = {};
 Object.values(iconWindows).forEach((windowId) => {
   windowState[windowId] = false;
@@ -195,14 +201,20 @@ const windowTitles = {
   'window-0': 'Recycle Bin',
   'window-1': 'Profile.prof',
   'window-2': 'Social Media.txt',
-  'window-3': 'Portfolio.doc'
+  'window-3': 'Portfolio.doc',
+  'window-4': 'Programs',
+  'window-5': 'Documents',
+  'window-6': 'Settings'
 };
 
 const windowIcons = {
   'window-0': 'recycle.png',
   'window-1': 'locked.png',
   'window-2': 'locked.png',
-  'window-3': 'text.png'
+  'window-3': 'text.png',
+  'window-4': 'programs.png',
+  'window-5': 'documents.png',
+  'window-6': 'settings.png'
 };
 
 function updateClock() {
@@ -275,31 +287,38 @@ function updateTaskbarButtons() {
   });
 }
 
-const originalIconClickHandler = (iconId) => {
+function setWindowOpenState(windowId, isOpen) {
+  const iconId = Object.keys(iconWindows).find((key) => iconWindows[key] === windowId);
   const icon = document.getElementById(iconId);
-  const windowId = iconWindows[iconId];
-  const img = icon.querySelector('.icon-image');
-
-  windowState[windowId] = !windowState[windowId];
-
+  const img = icon ? icon.querySelector('.icon-image') : null;
   const windowEl = document.getElementById(windowId);
-  if (windowState[windowId]) {
-    windowEl.classList.add('open');
-    img.src = 'unlocked.png';
-  } else {
-    windowEl.classList.remove('open');
-    img.src = 'locked.png';
+
+  windowState[windowId] = isOpen;
+
+  if (windowEl) {
+    if (isOpen) {
+      windowEl.classList.add('open');
+      if (img) img.src = 'unlocked.png';
+    } else {
+      windowEl.classList.remove('open');
+      if (img) img.src = 'locked.png';
+    }
   }
 
-  if (windowId === 'window-0') {
+  if (windowId === 'window-0' && img) {
     img.src = 'recycle.png';
   }
 
-  if (windowId === 'window-3') {
+  if (windowId === 'window-3' && img) {
     img.src = 'text.png';
   }
 
   updateTaskbarButtons();
+}
+
+const originalIconClickHandler = (iconId) => {
+  const windowId = iconWindows[iconId];
+  setWindowOpenState(windowId, !windowState[windowId]);
 };
 
 Object.keys(iconWindows).forEach((iconId) => {
@@ -311,24 +330,44 @@ document.querySelectorAll('.window-close').forEach((closeBtn) => {
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     const windowId = closeBtn.getAttribute('data-close');
-    const windowEl = document.getElementById(windowId);
-    windowEl.classList.remove('open');
-    windowState[windowId] = false;
+    setWindowOpenState(windowId, false);
+  });
+});
 
-    // Update icon image
-    const iconId = Object.keys(iconWindows).find((key) => iconWindows[key] === windowId);
-    const img = document.getElementById(iconId).querySelector('.icon-image');
-    img.src = 'locked.png';
-    if (windowId === 'window-0') img.src = 'recycle.png';
-    if (windowId === 'window-3') img.src = 'text.png';
+document.querySelectorAll('.recycle-item').forEach((item) => {
+  item.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const targetWindowId = item.getAttribute('data-window');
+    const currentOpenWindow = Object.keys(windowState).find((windowId) => windowState[windowId]);
 
-    updateTaskbarButtons();
+    if (targetWindowId && currentOpenWindow && currentOpenWindow !== targetWindowId) {
+      setWindowOpenState(currentOpenWindow, false);
+    }
+
+    if (targetWindowId) {
+      setWindowOpenState(targetWindowId, true);
+    }
   });
 });
 
 startButton.addEventListener('click', (e) => {
   e.stopPropagation();
   startMenu.classList.toggle('show');
+});
+
+document.querySelectorAll('.start-menu-item').forEach((item) => {
+  item.addEventListener('click', () => {
+    const targetWindowId = item.getAttribute('data-window');
+    if (targetWindowId === 'shutdown') {
+      self.close();
+      return;
+    }
+
+    if (targetWindowId) {
+      setWindowOpenState(targetWindowId, true);
+      startMenu.classList.remove('show');
+    }
+  });
 });
 
 document.addEventListener('click', (e) => {
