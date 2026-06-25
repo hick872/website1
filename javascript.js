@@ -252,9 +252,9 @@ function createTaskbarButton(windowId) {
       // Update icon
       const iconId = Object.keys(iconWindows).find((key) => iconWindows[key] === windowId);
       const img = document.getElementById(iconId).querySelector('.icon-image');
-      img.src = 'locked.png';
-      if (windowId === 'window-0') img.src = 'recycle.png';
-      if (windowId === 'window-3') img.src = 'text.png';
+      img.src = 'assets/locked.png';
+      if (windowId === 'window-0') img.src = 'assets/recycle.png';
+      if (windowId === 'window-3') img.src = 'assets/text.png';
     } else {
       // Restore window
       windowEl.classList.add('open');
@@ -264,9 +264,9 @@ function createTaskbarButton(windowId) {
       // Update icon
       const iconId = Object.keys(iconWindows).find((key) => iconWindows[key] === windowId);
       const img = document.getElementById(iconId).querySelector('.icon-image');
-      img.src = 'unlocked.png';
-      if (windowId === 'window-0') img.src = 'recycle.png';
-      if (windowId === 'window-3') img.src = 'text.png';
+      img.src = 'assets/unlocked.png';
+      if (windowId === 'window-0') img.src = 'assets/recycle.png';
+      if (windowId === 'window-3') img.src = 'assets/text.png';
     }
   });
 
@@ -298,19 +298,19 @@ function setWindowOpenState(windowId, isOpen) {
   if (windowEl) {
     if (isOpen) {
       windowEl.classList.add('open');
-      if (img) img.src = 'unlocked.png';
+      if (img) img.src = 'assets/unlocked.png';
     } else {
       windowEl.classList.remove('open');
-      if (img) img.src = 'locked.png';
+      if (img) img.src = 'assets/locked.png';
     }
   }
 
   if (windowId === 'window-0' && img) {
-    img.src = 'recycle.png';
+    img.src = 'assets/recycle.png';
   }
 
   if (windowId === 'window-3' && img) {
-    img.src = 'text.png';
+    img.src = 'assets/text.png';
   }
 
   updateTaskbarButtons();
