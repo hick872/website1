@@ -201,20 +201,20 @@ const windowTitles = {
   'window-0': 'Recycle Bin',
   'window-1': 'Profile.prof',
   'window-2': 'Social Media.txt',
-  'window-3': 'Portfolio.doc',
+  'window-3': 'Portfolio.docu',
   'window-4': 'Programs',
   'window-5': 'Documents',
   'window-6': 'Settings'
 };
 
 const windowIcons = {
-  'window-0': 'recycle.png',
-  'window-1': 'locked.png',
-  'window-2': 'locked.png',
-  'window-3': 'text.png',
-  'window-4': 'programs.png',
-  'window-5': 'documents.png',
-  'window-6': 'settings.png'
+  'window-0': 'assets/recycle.png',
+  'window-1': 'assets/locked.png',
+  'window-2': 'assets/locked.png',
+  'window-3': 'assets/text.png',
+  'window-4': 'assets/folder-open.png',
+  'window-5': 'assets/text.png',
+  'window-6': 'assets/settings.png'
 };
 
 function updateClock() {
